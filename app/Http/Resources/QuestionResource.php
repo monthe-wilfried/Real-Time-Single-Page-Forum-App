@@ -16,10 +16,10 @@ class QuestionResource extends JsonResource
     {
         return [
             'title' => $this->title,
-            'path' => $this->path,
+            'path' => $this->path,  // Our database doesn't contain any Path field. so, we used an accessor.
             'body' => $this->body,
             'created_at' => $this->created_at->diffForHumans(),
-
+            'user' => $this->user->name,
         ];
     }
 }

@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Model\Category;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Category[]|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
         //
+        return Category::latest()->get();
     }
 
     /**
@@ -36,17 +38,22 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $input['slug'] = str_slug($request->name);
+        Category::create($input);
+        return response('Category created', Response::HTTP_ACCEPTED);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Model\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return Category
      */
     public function show(Category $category)
     {
         //
+        return $category;
     }
 
     /**
@@ -70,6 +77,10 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $input = $request->all();
+        $input['slug'] = str_slug($request->name);
+        $category->update($input);
+        return response('Updated', Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -81,5 +92,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
