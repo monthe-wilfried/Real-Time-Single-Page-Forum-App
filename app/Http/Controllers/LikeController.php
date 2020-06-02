@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 class LikeController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('jwt');
+    }
+
     public function like(Reply $reply){
         $reply->likes()->create(['user_id'=>1]);
         return response('Liked', Response::HTTP_ACCEPTED);
