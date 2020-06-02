@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Model\Category;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,12 +12,12 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Category[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
         //
-        return Category::latest()->get();
+        return CategoryResource::collection(Category::latest()->get());
     }
 
     /**
@@ -48,12 +49,12 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Model\Category  $category
-     * @return Category
+     * @return CategoryResource
      */
     public function show(Category $category)
     {
         //
-        return $category;
+        return new CategoryResource($category);
     }
 
     /**
