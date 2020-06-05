@@ -16,6 +16,7 @@ Vue.use(Vuetify)
 import User from './helpers/User'
 window.User = User
 
+window.EventBus = new Vue();
 
 /**
  * The following block of code may be used to automatically register your

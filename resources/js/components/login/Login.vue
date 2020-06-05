@@ -11,24 +11,36 @@
 
             <v-text-field
                 v-model="form.password"
-                label="Name"
+                label="Password"
                 type="password"
                 required
             ></v-text-field>
 
             <v-btn
-                color="blue"
+                color="green"
                 class="mr-4"
                 type="submit"
             >
                 Login
             </v-btn>
 
+            <router-link to="/signup">
+                <v-btn
+                    color="blue"
+                    class="mr-4"
+                    type="submit"
+                >
+                    Signup
+                </v-btn>
+            </router-link>
+
         </v-form>
     </v-container>
 </template>
 
 <script>
+    import User from "../../helpers/User";
+
     export default {
         data(){
             return {
@@ -36,6 +48,11 @@
                     email:null,
                     password:null
                 }
+            }
+        },
+        created() {
+            if (User.loggedIn()){
+                this.$router.push('forum')
             }
         },
         methods:{

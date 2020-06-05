@@ -4,7 +4,10 @@ import AppStorage from "./AppStorage";
 class User {
     login(data){
         axios.post('api/auth/login', data)
-            .then(res => this.responseAfterLogin(res))
+            .then(res => {
+                this.responseAfterLogin(res)
+                window.location = '/forum'
+            })
             .catch(error => console.log(error.response.data))
     }
 
@@ -31,6 +34,7 @@ class User {
 
     logout(){
         AppStorage.clear()
+        window.location = '/forum'
     }
 
     name(){
