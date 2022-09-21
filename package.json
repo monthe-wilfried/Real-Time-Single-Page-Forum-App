@@ -28,6 +28,6 @@
     "dependencies": {
         "vue-fragment": "^1.5.1",
         "vue-router": "^3.3.2",
-        "vuetify": "^2.2.31"
+        "vuetify": "^2.6.10"
     }
 }
